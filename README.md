@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Biomarker AI Analyzer - Axo Longevity Challenge
+
+![Biomarker AI Analyzer](./public/screenshot.png)
+
+## Overview
+
+The **Biomarker AI Analyzer** is a high-performance web application designed for **Axo Longevity**. It leverages the power of Google's **Gemini AI** to process medical lab report PDFs, extract critical biomarkers, and provide clinical insights based on patient demographics.
+
+Developed by **Segni Dessalegn**, a Full Stack Engineer with an AI focus, this project demonstrates a seamless integration of modern web technologies with advanced LLM capabilities to solve real-world healthcare data challenges.
+
+## Key Features
+
+- **PDF Processing**: Seamless drag-and-drop upload for medical lab reports.
+- **AI-Powered Extraction**: Automatically extracts patient age, sex, and all biomarkers from unstructured PDF data.
+- **Data Standardization**: Converts complex biomarker names and units into standard English formats.
+- **Smart Classification**: Categorizes results into "Optimal", "Normal", or "Out of Range" based on clinical reference guidelines tailored to the patient's profile.
+- **Dynamic Configuration**: Users can customize the Gemini API key and model (e.g., Gemini 1.5 Flash, Gemini 2.0 Flash) directly from the interface.
+- **Premium UI**: A sleek, dark-themed interface built with glassmorphism aesthetics and smooth animations.
+
+## Tech Stack
+
+- **Framework**: [Next.js 15+](https://nextjs.org/) (App Router)
+- **Language**: TypeScript
+- **AI Engine**: [Google Gemini AI API](https://ai.google.dev/)
+- **Styling**: Vanilla CSS (Custom Design System)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [Lucide React](https://lucide.dev/)
 
 ## Getting Started
 
-First, run the development server:
+### 1. Prerequisites
+
+- Node.js 18+ installed.
+- A Google AI (Gemini) API Key. [Get one here](https://aistudio.google.com/app/apikey).
+
+### 2. Installation
+
+Clone the repository and install dependencies:
+
+```bash
+git clone <repository-url>
+cd challenge
+npm install
+```
+
+### 3. Environment Setup
+
+Create a `.env.local` file in the root directory (you can use `.env.example` as a template):
+
+```bash
+cp .env.example .env.local
+```
+
+Edit `.env.local` and add your Gemini API key:
+
+```env
+NEXT_PUBLIC_GEMINI_API_KEY=your_actual_api_key_here
+NEXT_PUBLIC_GEMINI_MODEL_NAME=gemini-1.5-flash
+```
+
+### 4. Running Locally
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## About the Developer
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Segni Dessalegn**  
+*Full Stack Engineer | AI Focus*
 
-## Learn More
+Passionate about building intelligent applications that bridge the gap between complex data and user-friendly interfaces. Specializing in React/Next.js ecosystems and LLM integrations.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Designed and Built for **Axo Longevity**.
