@@ -18,7 +18,6 @@ export const SettingsCard = ({ apiKey, setApiKey, modelName, setModelName }: Set
       className="settings-card glass mb-8"
     >
       <div className="flex items-center gap-2 mb-6 text-primary">
-        <Activity size={20} />
         <h3 className="m-0 text-lg">AI Configuration</h3>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
