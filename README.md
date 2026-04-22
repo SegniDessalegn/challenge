@@ -67,13 +67,16 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+![Biomarker AI Analyzer Setup](./public/screenshot.png)
+![Biomarker AI Analyzer Results](./public/screenshot2.png)
 
 ## About the Developer
 
 **Segni Dessalegn**  
 *Full Stack Engineer | AI Focus*
 
-Passionate about building intelligent applications that bridge the gap between complex data and user-friendly interfaces. Specializing in React/Next.js ecosystems and LLM integrations.
+- **Portfolio**: [segni.dev](https://segni.dev)
+- **Focus**: Building intelligent applications that bridge the gap between complex data and user-friendly interfaces. Specializing in React/Next.js ecosystems and LLM integrations.
 
 ---
 
