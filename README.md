@@ -1,6 +1,7 @@
 # Biomarker AI Analyzer - Axo Longevity Challenge
 
-![Biomarker AI Analyzer](./public/screenshot.png)
+![Biomarker AI Analyzer Setup](./public/screenshot.png)
+![Biomarker AI Analyzer Results](./public/screenshot2.png)
 
 ## Overview
 
@@ -67,8 +68,6 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
-![Biomarker AI Analyzer Setup](./public/screenshot.png)
-![Biomarker AI Analyzer Results](./public/screenshot2.png)
 
 ## About the Developer
 
