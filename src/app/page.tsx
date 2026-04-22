@@ -98,8 +98,55 @@ export default function Home() {
         </motion.p>
       </header>
 
-      <div className="upload-card glass">
-        {!data && !loading && (
+      {!data && !loading && (
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="settings-card glass mb-8"
+        >
+          <div className="flex items-center gap-2 mb-6 text-primary">
+            <Activity size={20} />
+            <h3 className="m-0 text-lg">AI Configuration</h3>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="input-group">
+              <label htmlFor="apiKey" className="block text-sm font-medium mb-2 text-muted">Gemini API Key</label>
+              <div className="relative">
+                <input 
+                  id="apiKey"
+                  type="password" 
+                  value={apiKey} 
+                  onChange={(e) => setApiKey(e.target.value)}
+                  placeholder="Enter your Gemini API Key"
+                  className="input-field pl-10"
+                />
+                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted">
+                  <AlertCircle size={18} />
+                </div>
+              </div>
+            </div>
+            <div className="input-group">
+              <label htmlFor="modelName" className="block text-sm font-medium mb-2 text-muted">Model Name</label>
+              <div className="relative">
+                <input 
+                  id="modelName"
+                  type="text" 
+                  value={modelName} 
+                  onChange={(e) => setModelName(e.target.value)}
+                  placeholder="gemini-1.5-flash"
+                  className="input-field pl-10"
+                />
+                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted">
+                  <Activity size={18} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      )}
+
+      {!data && !loading && (
+        <div className="upload-card glass">
           <div 
             className={`drop-zone ${isDragActive ? 'active' : ''}`}
             onDragOver={(e) => { e.preventDefault(); setIsDragActive(true); }}
@@ -126,10 +173,37 @@ export default function Home() {
               <p className="text-muted">Maximum file size: 10MB</p>
             </div>
           </div>
-        )}
 
-        <AnimatePresence>
-          {loading && (
+          <AnimatePresence>
+            {error && (
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="mt-4 p-4 rounded-lg bg-red-900/20 text-red-400 flex items-center gap-2"
+              >
+                <AlertCircle size={20} />
+                <span>{error}</span>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {file && (
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="mt-8"
+            >
+              <button className="btn btn-primary w-full py-4 text-lg" onClick={processReport}>
+                Extract Biomarkers from {file.name}
+              </button>
+            </motion.div>
+          )}
+        </div>
+      )}
+
+      <AnimatePresence>
+        {loading && (
+          <div className="upload-card glass">
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -140,56 +214,9 @@ export default function Home() {
               <p className="text-lg font-medium">Analyzing your report with Gemini AI...</p>
               <p className="text-muted mt-2">Standardizing biomarkers and classifying results...</p>
             </motion.div>
-          )}
-
-          {error && (
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="mt-4 p-4 rounded-lg bg-red-900/20 text-red-400 flex items-center gap-2"
-            >
-              <AlertCircle size={20} />
-              <span>{error}</span>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {file && !loading && !data && (
-          <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-8"
-          >
-            <div className="config-form mb-6">
-              <div className="input-group mb-4">
-                <label htmlFor="apiKey" className="block text-sm font-medium mb-2">Gemini API Key</label>
-                <input 
-                  id="apiKey"
-                  type="text" 
-                  value={apiKey} 
-                  onChange={(e) => setApiKey(e.target.value)}
-                  placeholder="Enter your Gemini API Key"
-                  className="input-field"
-                />
-              </div>
-              <div className="input-group">
-                <label htmlFor="modelName" className="block text-sm font-medium mb-2">Model Name</label>
-                <input 
-                  id="modelName"
-                  type="text" 
-                  value={modelName} 
-                  onChange={(e) => setModelName(e.target.value)}
-                  placeholder="e.ai/gemini-1.5-flash"
-                  className="input-field"
-                />
-              </div>
-            </div>
-            <button className="btn btn-primary w-full" onClick={processReport}>
-              Extract Biomarkers
-            </button>
-          </motion.div>
+          </div>
         )}
-      </div>
+      </AnimatePresence>
 
       <AnimatePresence>
         {data && (
@@ -211,11 +238,17 @@ export default function Home() {
                 <span className="info-label">Sex</span>
                 <span className="font-bold capitalize">{data.patientSex}</span>
               </div>
-              <div className="mt-8 p-4 rounded-xl bg-primary/5 border border-primary/10">
-                <p className="text-sm text-muted italic">
+              <div className="mt-8 p-4 rounded-xl bg-primary/5 border border-primary/10 mb-6">
+                <p className="text-sm text-muted italic m-0">
                   Results are classified based on the patient's specific age and sex using clinical reference guidelines.
                 </p>
               </div>
+              <button 
+                className="btn w-full justify-center bg-white/5 hover:bg-white/10 text-white"
+                onClick={() => { setData(null); setFile(null); }}
+              >
+                Analyze Another Report
+              </button>
             </aside>
 
             <section className="biomarker-table glass">
