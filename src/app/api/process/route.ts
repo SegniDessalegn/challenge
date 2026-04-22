@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Gemini API Key is missing' }, { status: 400 });
     }
 
-    const modelName = clientModelName || process.env.NEXT_PUBLIC_GEMINI_MODEL_NAME || 'gemini-1.5-flash';
+    const modelName = clientModelName || process.env.NEXT_PUBLIC_GEMINI_MODEL_NAME || 'gemini-3.1-flash-lite-preview';
 
     const genAI = new GoogleGenerativeAI(apiKey);
     const buffer = await file.arrayBuffer();

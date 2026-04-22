@@ -55,7 +55,7 @@ Edit `.env.local` and add your Gemini API key:
 
 ```env
 NEXT_PUBLIC_GEMINI_API_KEY=your_actual_api_key_here
-NEXT_PUBLIC_GEMINI_MODEL_NAME=gemini-1.5-flash
+NEXT_PUBLIC_GEMINI_MODEL_NAME=gemini-3.1-flash-lite-preview
 ```
 
 ### 4. Running Locally

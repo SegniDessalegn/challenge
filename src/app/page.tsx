@@ -25,7 +25,7 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [isDragActive, setIsDragActive] = useState(false);
   const [apiKey, setApiKey] = useState(process.env.NEXT_PUBLIC_GEMINI_API_KEY || '');
-  const [modelName, setModelName] = useState(process.env.NEXT_PUBLIC_GEMINI_MODEL_NAME || 'gemini-1.5-flash');
+  const [modelName, setModelName] = useState(process.env.NEXT_PUBLIC_GEMINI_MODEL_NAME || 'gemini-3.1-flash-lite-preview');
 
   const onDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -133,7 +133,7 @@ export default function Home() {
                   type="text" 
                   value={modelName} 
                   onChange={(e) => setModelName(e.target.value)}
-                  placeholder="gemini-1.5-flash"
+                  placeholder="gemini-3.1-flash-lite-preview"
                   className="input-field pl-10"
                 />
                 <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted">
