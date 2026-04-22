@@ -354,6 +354,71 @@ td {
   gap: 0.5rem;
 }
 
+.upload-icon {
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.drop-zone:hover .upload-icon {
+  color: var(--primary);
+  transform: translateY(-5px);
+}
+
+.upload-icon-active {
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 0 10px var(--primary-glow));
+}
+
+.upload-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.upload-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 0;
+  max-width: 300px;
+  line-height: 1.5;
+}
+
+.error-message {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.btn-large {
+  padding: 1.25rem 2rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.01em;
+  box-shadow: 0 4px 20px var(--primary-glow);
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.btn-large:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px var(--primary-glow);
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
+}
+
 .justify-center {
   justify-content: center;
 }
@@ -373,5 +438,6 @@ td {
 .m-0 {
   margin: 0;
 }
+
 
 

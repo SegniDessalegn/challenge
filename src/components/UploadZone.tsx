@@ -1,6 +1,6 @@
 'use client';
 
-import { Upload, FileText, AlertCircle } from 'lucide-react';
+import { Upload, FileText, AlertCircle, Activity } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface UploadZoneProps {
@@ -42,25 +42,25 @@ export const UploadZone = ({
         />
         <div className="flex flex-col items-center text-center">
           {file ? (
-            <FileText size={64} color="var(--primary)" style={{ marginBottom: '1rem' }} />
+            <FileText size={48} className="upload-icon-active" />
           ) : (
-            <Upload size={64} color="var(--text-muted)" style={{ marginBottom: '1rem' }} />
+            <Upload size={48} className="upload-icon" />
           )}
-          <h2 className="text-xl font-semibold mb-2 text-white">
+          <h2 className="upload-title">
             {file ? file.name : 'Click or drag PDF here'}
           </h2>
-          <p className="text-muted">Maximum file size: 10MB</p>
+          <p className="upload-subtitle">Supports medical lab reports in PDF format (up to 10MB)</p>
         </div>
       </div>
 
       <AnimatePresence>
         {error && (
           <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="mt-4 p-4 rounded-lg bg-red-900/20 text-red-400 flex items-center gap-2"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="error-message"
           >
-            <AlertCircle size={20} />
+            <AlertCircle size={18} />
             <span>{error}</span>
           </motion.div>
         )}
@@ -68,15 +68,17 @@ export const UploadZone = ({
 
       {file && (
         <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="mt-8"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mt-6"
         >
-          <button className="btn btn-primary w-full py-4 text-lg" onClick={onProcess}>
-            Extract Biomarkers from {file.name}
+          <button className="btn btn-primary btn-large w-full" onClick={onProcess}>
+            <Activity size={20} />
+            <span>Extract Biomarkers</span>
           </button>
         </motion.div>
       )}
+
     </div>
   );
 };
