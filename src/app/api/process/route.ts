@@ -1,22 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
 
 export async function POST(req: NextRequest) {
-  console.log('GEMINI_API_KEY:', process.env.GEMINI_API_KEY);
   try {
     const formData = await req.formData();
     const file = formData.get('file') as File;
+    const clientApiKey = formData.get('apiKey') as string;
+    const clientModelName = formData.get('modelName') as string;
 
     if (!file) {
       return NextResponse.json({ error: 'No file uploaded' }, { status: 400 });
     }
 
+    const apiKey = clientApiKey || process.env.NEXT_PUBLIC_GEMINI_API_KEY || process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      return NextResponse.json({ error: 'Gemini API Key is missing' }, { status: 400 });
+    }
+
+    const modelName = clientModelName || process.env.NEXT_PUBLIC_GEMINI_MODEL_NAME || 'gemini-1.5-flash';
+
+    const genAI = new GoogleGenerativeAI(apiKey);
     const buffer = await file.arrayBuffer();
     const base64Data = Buffer.from(buffer).toString('base64');
 
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const model = genAI.getGenerativeModel({ model: modelName });
 
     const prompt = `
       Analyze this medical lab report PDF.
