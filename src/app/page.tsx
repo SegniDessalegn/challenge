@@ -24,6 +24,8 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isDragActive, setIsDragActive] = useState(false);
+  const [apiKey, setApiKey] = useState(process.env.NEXT_PUBLIC_GEMINI_API_KEY || '');
+  const [modelName, setModelName] = useState(process.env.NEXT_PUBLIC_GEMINI_MODEL_NAME || 'gemini-1.5-flash');
 
   const onDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -54,6 +56,8 @@ export default function Home() {
 
     const formData = new FormData();
     formData.append('file', file);
+    formData.append('apiKey', apiKey);
+    formData.append('modelName', modelName);
 
     try {
       const response = await fetch('/api/process', {
@@ -62,7 +66,8 @@ export default function Home() {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to process the report.');
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to process the report.');
       }
 
       const result = await response.json();
@@ -155,7 +160,31 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             className="mt-8"
           >
-            <button className="btn btn-primary" onClick={processReport}>
+            <div className="config-form mb-6">
+              <div className="input-group mb-4">
+                <label htmlFor="apiKey" className="block text-sm font-medium mb-2">Gemini API Key</label>
+                <input 
+                  id="apiKey"
+                  type="text" 
+                  value={apiKey} 
+                  onChange={(e) => setApiKey(e.target.value)}
+                  placeholder="Enter your Gemini API Key"
+                  className="input-field"
+                />
+              </div>
+              <div className="input-group">
+                <label htmlFor="modelName" className="block text-sm font-medium mb-2">Model Name</label>
+                <input 
+                  id="modelName"
+                  type="text" 
+                  value={modelName} 
+                  onChange={(e) => setModelName(e.target.value)}
+                  placeholder="e.ai/gemini-1.5-flash"
+                  className="input-field"
+                />
+              </div>
+            </div>
+            <button className="btn btn-primary w-full" onClick={processReport}>
               Extract Biomarkers
             </button>
           </motion.div>
