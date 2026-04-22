@@ -31,7 +31,7 @@ export default function Home() {
       <Header />
 
       {!data && !loading && (
-        <>
+        <div className="setup-container">
           <SettingsCard 
             apiKey={apiKey}
             setApiKey={setApiKey}
@@ -49,7 +49,7 @@ export default function Home() {
             error={error}
             onProcess={processReport}
           />
-        </>
+        </div>
       )}
 
       <AnimatePresence>
